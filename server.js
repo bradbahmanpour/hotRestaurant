@@ -17,26 +17,23 @@ app.use(bodyParser.json());
 // =============================================================
 var characters = [
   {
-    routeName: "yoda",
+    customerID: "Brad",
+    name: "Brad Bahmanpour",
+    phonenumber: "310-508-0883",
+    email: "brad@easervices.net"
+  },
+  {
+    customerID: "Daniel",
+    name: "Daniel",
+    phonenumber: "818-567-8900",
+    email: "daniel@easervices.net"
+  },
+  {
+    customerID: "Alex Rhee",
     name: "Yoda",
-    role: "Jedi Master",
-    age: 900,
-    forcePoints: 2000
+    phonenumber: "818-312-2906",
+    email: "alex@easervices.net"
   },
-  {
-    routeName: "darthmaul",
-    name: "Darth Maul",
-    role: "Sith Lord",
-    age: 200,
-    forcePoints: 1200
-  },
-  {
-    routeName: "obiwankenobi",
-    name: "Obi Wan Kenobi",
-    role: "Jedi Master",
-    age: 55,
-    forcePoints: 1350
-  }
 ];
 
 // Routes
@@ -73,9 +70,11 @@ app.post("/api/new", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body-parser middleware
   var newcharacter = req.body;
+
+  console.log(newcharacter);
   // Using a RegEx Pattern to remove spaces from newCharacter
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+  newcharacter.routeName = newcharacter.Name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newcharacter);
 

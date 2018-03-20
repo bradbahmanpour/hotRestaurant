@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Star Wars - Express</title>
-  <!-- Latest compiled and minified CSS & JS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>A Hot Restaurant</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 </head>
-<body>
 
+<body>
   <div class="container">
     <div class="jumbotron">
-      <h1>Star Wars Express</h1>
-      <h3>The greatest resource in the galaxy for Star Wars statistics!</h3>
+      <h1>
+        <center>
+          <span class="glyphicon glyphicon-fire"></span> Hot Restaurant
+          <span class="glyphicon glyphicon-fire"></span>
+        </center>
+      </h1>
+      <h3>
+        <center>It is very hot
+          <span class="glyphicon glyphicon-sunglasses"></span> in this restaurant.</center>
+      </h3>
+      <h2>
+        <center>Make Reservation</center>
+      </h2>
       <hr>
-      <a href="/"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> View Characters</button></a>
+      <center>
+        <a href="/">
+          <button type="button" class="btn btn-danger btn-lg" id="list-btn">
+            <span class="glyphicon glyphicon-list-alt"></span> Make Reservation</button>
+        </a>
+        <a href="/">
+          <button type="button" class="btn btn-default btn-lg" id="home-btn">
+            <span class="glyphicon glyphicon-home"></span>
+          </button>
+        </a>
+      </center>
     </div>
     <div class="row">
 
@@ -24,62 +46,56 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong>Add Characters</strong></h3>
+            <h3 class="panel-title">
+              <strong>Current Reservations
+                <span class="glyphicon glyphicon-leaf"></span>
+              </strong>
+            </h3>
           </div>
           <div class="panel-body">
-            <form method="POST" role="form">
 
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name">
-              </div>
-
-              <div class="form-group">
-                <label for="role">Role</label>
-                <input type="text" class="form-control" id="role">
-              </div>
-
-              <div class="form-group">
-                <label for="age">Age</label>
-                <input type="text" class="form-control" id="age">
-              </div>
-
-              <div class="form-group">
-                <label for="force-points">Force Points</label>
-                <input type="text" class="form-control" id="force-points">
-              </div>
-
-            </form>
-            <br>
-            <div class="text-right">
-              <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="glyphicon glyphicon-fire"></span> Add to the Force</button>
-            </div>
           </div>
         </div>
 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <strong>Waiting List
+                  <span class="glyphicon glyphicon-glass"></span>
+                </strong>
+              </h3>
+            </div>
+            <div class="panel-body">
+
+            </div>
+          </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript">
-    // Question: What does this code do?
-    $("#add-btn").on("click", function(event) {
-      event.preventDefault();
-      var newCharacter = {
-        name: $("#name").val().trim(),
-        role: $("#role").val().trim(),
-        age: $("#age").val().trim(),
-        forcePoints: $("#force-points").val().trim()
-      };
+    <script type="text/javascript">
+      $("#search-btn").on("click", function () {
+        var searchedReservation = $("#reservation-search").val().trim();
 
-      // Question: What does this code do??
-      $.post("/api/new", newCharacter)
-        .then(function(data) {
+        // Using a RegEx Pattern to remove spaces from searchedCharacter
+        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+        searchedReservation = searchedReservation.replace(/\s+/g, "").toLowerCase();
+
+        $.get("/api/new" + searchedReservation, function (data) {
           console.log(data);
-          alert("Adding character...");
+          if (data) {
+
+            $("#ID").text(data.ID);
+
+          }
+          else {
+            $("#ID").
+              $("#name").text("Current Reservations");
+            $("#info").hide();
+          }
         });
-    });
-  </script>
+      });
+    </script>
 
 </body>
+
 </html>
