@@ -30,10 +30,28 @@ var characters = [
   },
   {
     customerID: "Alex Rhee",
-    name: "Yoda",
+    name: "Alex",
     phonenumber: "818-312-2906",
     email: "alex@easervices.net"
   },
+  {
+    customerID: "Mary Brown",
+    name: "Mary",
+    phonenumber: "818-312-2906",
+    email: "mary@easervices.net"
+  },
+  {
+    customerID: "Lisa White",
+    name: "Lisa",
+    phonenumber: "818-111-2906",
+    email: "lisa@easervices.net"
+  },
+  {
+    customerID: "Kate Martin",
+    name: "Kate",
+    phonenumber: "818-222-2906",
+    email: "kate@easervices.net"
+  }
 ];
 
 // Routes
@@ -66,21 +84,17 @@ app.get("/api/:characters?", function(req, res) {
 });
 
 // Create New Characters - takes in JSON input
-app.post("/api/new", function(req, res) {
+app.get("/tables", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body-parser middleware
-  var newcharacter = req.body;
+ // var newcharacter = req.body;
 
-  console.log(newcharacter);
+  //console.log(characters);
   // Using a RegEx Pattern to remove spaces from newCharacter
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newcharacter.routeName = newcharacter.Name.replace(/\s+/g, "").toLowerCase();
+ // newcharacter.routeName = newcharacter.Name.replace(/\s+/g, "").toLowerCase();
 
-  console.log(newcharacter);
-
-  characters.push(newcharacter);
-
-  res.json(newcharacter);
+  res.json(characters);
 });
 
 // Starts the server to begin listening

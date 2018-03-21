@@ -52,7 +52,7 @@
               </strong>
             </h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" id="current">
 
           </div>
         </div>
@@ -65,7 +65,7 @@
                 </strong>
               </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body"  id="waitlist">
 
             </div>
           </div>
@@ -73,26 +73,20 @@
     </div>
 
     <script type="text/javascript">
-      $("#search-btn").on("click", function () {
-        var searchedReservation = $("#reservation-search").val().trim();
+    $(window).on( "load", function()  {
 
-        // Using a RegEx Pattern to remove spaces from searchedCharacter
-        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-        searchedReservation = searchedReservation.replace(/\s+/g, "").toLowerCase();
+        $.get("/tables", function (data) {
 
-        $.get("/api/new" + searchedReservation, function (data) {
+          
           console.log(data);
-          if (data) {
-
-            $("#ID").text(data.ID);
-
+          for (var i = 0; i < 5; i++) {
+            $("#current").append("<div>" + (i + 1) + ": " + data[i].customerID + " </div>")
           }
-          else {
-            $("#ID").
-              $("#name").text("Current Reservations");
-            $("#info").hide();
+          for (var i = 5; i < data.length; i++) {
+            $("#waitlist").append("<div>" + (i + 1) + ": " + data[i].customerID + " </div>")
           }
-        });
+        })
+      
       });
     </script>
 
